@@ -28,9 +28,7 @@ twitter_username: connorstewarty
 github_username:  connor-stewarty
 
 # Build settings
-theme: jekyll-theme-hacker
-plugins:
-  - jekyll-feed
+theme: minima
 
 # Exclude from processing.
 # The following items will not be processed, by default.
