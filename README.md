@@ -1,3 +1,3 @@
 # connor-stewarty.github.io
-GitHub Pages 
+GitHub Pages   
 [connor-stewarty.github.io](https://connor-stewarty.github.io/).
