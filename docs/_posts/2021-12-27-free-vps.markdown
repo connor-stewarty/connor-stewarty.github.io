@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "Free VPS"
+date:   2021-12-27 15:53:15 -0600
+categories: [vps, oracle cloud]
+---
+Today I made two virtual private servers using [Oracle Cloud's][Oracle] free tier. 
+The free tier comes with AMD processors, 1GB RAM, and 200 total storage to use between them. 
+This is pretty impressive compared to other free offerings from Google, AWS, or Azure. 
+
+I plan to use them for personal programming projects, such as this post that was created on the VPS. One specific project I would like to create on one of the VPS is my own VPN. 
+
+[Oracle]: https://www.oracle.com/cloud/free/
