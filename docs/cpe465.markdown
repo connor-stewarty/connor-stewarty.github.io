@@ -1,0 +1,6 @@
+---
+layout: page
+permalink: /projects/cpe465/
+---
+
+These are the projects I created for CPE 465 - Network Security during Spring 2021.
