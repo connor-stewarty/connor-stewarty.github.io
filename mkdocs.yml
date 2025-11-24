@@ -3,6 +3,10 @@ site_url: https://connorstewarty.com
 
 theme:
   name: material
+  palette:
+    scheme: slate
+    primary: blue
+    accent: blue
 
 plugins:
   - search
