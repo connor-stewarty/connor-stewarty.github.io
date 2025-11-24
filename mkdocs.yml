@@ -1,0 +1,9 @@
+site_name: connorstewarty
+site_url: https://connorstewarty.com
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - blog
