@@ -9,14 +9,14 @@ It uses Jekyll to generate the static site using markdown.
 
 This is an example of Jekyll's powerful support for code snippets:
 
-{% highlight c++ %}
+``` c
 #include <iostream>
 
 int main() {
     std::cout << "Hello World!";
     return 0;
 }
-{% endhighlight %}
+```
 
 This is a link to my [Github][Github]   
 This is a link to my [LinkedIn][LinkedIn]

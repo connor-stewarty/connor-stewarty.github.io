@@ -1,5 +1,6 @@
 site_name: connorstewarty
 site_url: https://connorstewarty.com
+repo_url: https://github.com/connor-stewarty/connorstewarty.com
 
 theme:
   name: material
@@ -7,6 +8,8 @@ theme:
     scheme: slate
     primary: blue
     accent: blue
+  features:
+    - content.code.copy
 
 plugins:
   - search
