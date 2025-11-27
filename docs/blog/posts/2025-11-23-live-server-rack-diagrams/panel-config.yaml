@@ -1,0 +1,21 @@
+---
+cellIdPreamble: "cell-"
+cells: 
+  67.67.67.67: # (1)!
+    dataRef: '{__name__="probe_success", instance="blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115", job="blackbox-ping", target="67.67.67.67"}' # (2)!
+    label: &label
+      separator: "colon"
+      units: "none"
+      decimalPoints: 0
+      valueMappings: # (3)!
+        - {value: 1, text: "UP"} 
+        - {value: 0, text: "DOWN"}
+    labelColor: &labelColor
+      gradientMode: "hue"
+      thresholds: # (4)!
+        - {color: "red", level: 0}
+        - {color: "green", level: 1}
+  8.8.8.8: # (5)!
+    dataRef: '{__name__="probe_success", instance="blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115", job="blackbox-ping", target="8.8.8.8"}'
+    label: *label # (6)!
+    labelColor: *labelColor # (7)!

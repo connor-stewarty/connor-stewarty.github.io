@@ -9,3 +9,4 @@ version = "0.1.0"
 
 [dependencies]
 mkdocs-material = ">=9.7.0,<10"
+pymdown-extensions = ">=10.17.2,<11"
