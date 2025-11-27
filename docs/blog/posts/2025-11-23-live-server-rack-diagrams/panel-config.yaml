@@ -1,8 +1,8 @@
 ---
 cellIdPreamble: "cell-"
 cells: 
-  67.67.67.67: # (1)!
-    dataRef: '{__name__="probe_success", instance="blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115", job="blackbox-ping", target="67.67.67.67"}' # (2)!
+  google.com: # (1)!
+    dataRef: '{__name__="probe_success", instance="blackbox-exporter-prometheus-blackbox-exporter.monitoring.svc.cluster.local:9115", job="blackbox-http", target="https://google.com"}' # (2)!
     label: &label
       separator: "colon"
       units: "none"

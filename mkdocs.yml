@@ -15,6 +15,7 @@ theme:
 plugins:
   - search
   - blog
+  - tags
 
 markdown_extensions:
   - pymdownx.highlight:
