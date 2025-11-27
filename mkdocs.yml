@@ -1,5 +1,6 @@
 site_name: connorstewarty
 site_url: https://connorstewarty.com
+repo_url: https://github.com/connor-stewarty/connorstewarty.com
 
 theme:
   name: material
@@ -7,7 +8,36 @@ theme:
     scheme: slate
     primary: blue
     accent: blue
+  features:
+    - content.code.copy
+    - content.code.annotate
+    - navigation.footer
+  custom_dir: overrides
 
 plugins:
   - search
   - blog
+  - tags
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+extra:
+  annotate:
+    json: [.s2]
+    yaml: [".no"]
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/connor-stewarty
+    - icon: fontawesome/brands/gitlab
+      link: https://gitlab.com/connorstewarty
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/connorstewarty
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/connorstewarty/

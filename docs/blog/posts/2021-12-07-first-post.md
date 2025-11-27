@@ -1,6 +1,13 @@
 ---
 date:
   created: 2021-12-07
+comments: true
+authors:
+  - connor
+categories:
+  - Blog
+tags:
+  - Jekyll
 ---
 
 # First Post
@@ -9,14 +16,14 @@ It uses Jekyll to generate the static site using markdown.
 
 This is an example of Jekyll's powerful support for code snippets:
 
-{% highlight c++ %}
+``` c
 #include <iostream>
 
 int main() {
     std::cout << "Hello World!";
     return 0;
 }
-{% endhighlight %}
+```
 
 This is a link to my [Github][Github]   
 This is a link to my [LinkedIn][LinkedIn]
