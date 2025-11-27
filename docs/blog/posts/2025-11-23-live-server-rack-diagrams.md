@@ -12,23 +12,23 @@ tags:
   - Monitoring
   - DevOps
   - Kubernetes
-# draft: true
+comments: true
 ---
 
 # Live Server Rack Diagrams
-This diagram combines a draw.io svg diagram with data from prometheus blackbox exporter to create a live server rack diagram.
+Building and maintaining server racks often requires both accurate documentation and real-time visibility into which systems are online. In this post, I'll show how to make a live server rack diagram that combines a draw.io `.svg`, Prometheus, Blackbox Exporter and Grafana.
 
 ## Demo
 ![Dashboard View](./2025-11-23-live-server-rack-diagrams/dashboard-view.png)
 
 ## Why
-I recently needed to label and verify hardware in a server rack and wanted a "live" server rack diagram to be able to tell what systems were up/down without manually checking. I was inspired by [a post on r/sysadmin](https://www.reddit.com/r/sysadmin/comments/13ox4rr/what_do_you_use_for_live_rack_diagrams/) to use grafana and draw.io, but saw the FlowCharting plugin suggested was not maintained. I found the [Flow](https://grafana.com/grafana/plugins/andrewbmchugh-flow-panel/) plugin instead and liked it so much I decided to make this post. This solution lives entirely in Git for version control making it manageable for both small homelabs and larger environments. 
+I recently needed to label and verify hardware in a server rack and wanted a "live" server rack diagram to be able to tell what systems were up/down without manually checking. I was inspired by [a post on r/sysadmin](https://www.reddit.com/r/sysadmin/comments/13ox4rr/what_do_you_use_for_live_rack_diagrams/) to use Grafana and draw.io, but saw the FlowCharting plugin suggested was not maintained. I found the [Flow](https://grafana.com/grafana/plugins/andrewbmchugh-flow-panel/) plugin instead and liked it so much I decided to make this post. This solution lives entirely in Git for version control making it manageable for both small homelabs and larger environments. 
 
 ## Step-by-step Instructions
 ### Install Kubernetes Cluster
 There are many options for a development Kubernetes cluster, a good overview is [here](https://docs.tilt.dev/choosing_clusters.html). For this project, I used [Rancher Desktop](https://rancherdesktop.io/) on macOS.
 
-If you choose a different Kubernetes cluster option, be sure to intall the following tools:  
+If you choose a different Kubernetes cluster option, be sure to install the following tools:  
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)  
 - [helm](https://helm.sh/docs/intro/install/)  
 
@@ -77,7 +77,7 @@ Install [kube-prometheus-stack](https://github.com/prometheus-community/helm-cha
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts  
 helm repo update
 ```
-Create a `prometheus_values.yaml` file to configure the chart with the grafana plugin, blackbox exporter, and hosts to probe for up/down status:
+Create a `prometheus_values.yaml` file to configure the chart with the Grafana plugin, blackbox exporter, and hosts to probe for up/down status:
 ``` yaml title="prometheus_values.yaml"
 grafana:
   plugins:
@@ -120,7 +120,7 @@ prometheus:
 3.  DNS name of blackbox exporter service for prometheus to scrape
 4.  List of `icmp/ping` targets to probe for up/down status
 
-Then install the chart with the custom values to deploy the prometheus and grafana stack in the `monitoring` namespace:
+Then install the chart with the custom values to deploy the Prometheus and Grafana stack in the `monitoring` namespace:
 ``` sh
 helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack \
   -f prometheus_values.yaml \
@@ -130,7 +130,7 @@ Get Grafana 'admin' user password by running:
 ``` sh
 kubectl --namespace monitoring get secrets kube-prometheus-stack-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo  
 ```
-Access Grafana local instance on `http://localhost:3000` by port forwarding the grafana pod:
+Access your local Grafana instance on `http://localhost:3000` by port forwarding the Frafana pod:
 ``` sh
 export POD_NAME=$(kubectl --namespace monitoring get pod -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=kube-prometheus-stack" -oname)  
 kubectl --namespace monitoring port-forward $POD_NAME 3000  
@@ -141,7 +141,7 @@ Open the draw.io online editor by going [here](https://app.diagrams.net/). Befor
 
 Any type of diagram can be used, but for this project I am creating a server rack diagram. Enable the server rack shapes by going to **+ More Shapes** in the bottom right and enabling the **Rack** shapes.
 
-Add svg data IDs for any elements that will be tied to prometheus items. To do this right click the element in draw.io **Edit Data... ->** and double click **ID** to set the svg data ID. In the below diagram I set a svg data ID to match the element label for the `google.com` element and the `8.8.8.8` element. These are the same hosts I specified in the prometheus config for probing up/down status.
+Add svg data IDs for any elements that will be tied to Prometheus items. To do this right click the element in draw.io **Edit Data... ->** and double click **ID** to set the svg data ID. In the below diagram I set a svg data ID to match the element label for the `google.com` element and the `8.8.8.8` element. These are the same hosts I specified in the Prometheus config for probing up/down status.
 
 Once the diagram has been created, save it by going to **File -> Export as -> SVG...**
 
@@ -149,7 +149,7 @@ I created this simple `rack-diagram.drawio.svg` diagram for the project:
 ![Rack Diagram](./2025-11-23-live-server-rack-diagrams/rack-diagram.drawio.svg)
 
 ### Create Grafana Dashboard
-Access Grafana local instance on `http://localhost:3000` by port forwarding the grafana pod if not already done so.
+Access Grafana local instance on `http://localhost:3000` by port forwarding the Grafana pod if not already done so.
 
 Create a new dashboard and add a visualization. Use **Prometheus** as the datasource and select **Flow** as the visualization type.
 
@@ -160,7 +160,7 @@ In the **Flow -> SVG** section add the content of the `rack-diagram.drawio.svg`:
 --8<-- "docs/blog/posts/2025-11-23-live-server-rack-diagrams/rack-diagram.drawio.svg"
 ```
 
-Then in the **Flow -> Panel Config** section add the panel config to map the prometheus blackbox exporter data to the svg elements:
+Then in the **Flow -> Panel Config** section add the panel config to map the Prometheus blackbox exporter data to the svg elements:
 ``` yaml title="panel-config.yaml"
 --8<-- "docs/blog/posts/2025-11-23-live-server-rack-diagrams/panel-config.yaml"
 ```
@@ -178,12 +178,16 @@ The diagram labels should now be populated with data from Prometheus and show `:
 ![Create Dashboard View](./2025-11-23-live-server-rack-diagrams/create-dashboard-view.png)
 
 ### GitOps
-* TODO
-* Example repo
-* Point to it w/Argo?
+This solution also supports a GitOps workflow as the helm charts, diagram, and dashboard are all text based. As an alternative to following the above manual steps of deployment, this solution can be deployed with a GitOps tool such as Fleet or ArgoCD.
+
+An example GitOps project for this same live server rack diagram can be found [here](https://github.com/connor-stewarty/live-server-rack-diagram). 
 
 ## Troubleshooting
-* TODO
+* Labels aren't changing with the up/down status from Prometheus?
+    * Ensure that the `svgdata` plugin has been enabled in draw.io and the svg data IDs match what is in the Flow panel config.
+* Labels are cutoff or not showing fully?
+    * If the diagram is too small, the labels can render outside of the diagram and be cutoff. One workaround is to add a large transparent rectangle around the diagram to make it larger.
+* For more troubleshooting and debugging information check out the official [Flow plugin documentation](https://grafana.com/grafana/plugins/andrewbmchugh-flow-panel/).
 
 ## Sources
 * [https://www.reddit.com/r/sysadmin/comments/13ox4rr/what_do_you_use_for_live_rack_diagrams/](https://www.reddit.com/r/sysadmin/comments/13ox4rr/what_do_you_use_for_live_rack_diagrams/)

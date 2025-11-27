@@ -1,6 +1,13 @@
 ---
 date:
   created: 2021-12-07
+comments: true
+authors:
+  - connor
+categories:
+  - Blog
+tags:
+  - Jekyll
 ---
 
 # First Post

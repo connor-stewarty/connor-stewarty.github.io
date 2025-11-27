@@ -11,6 +11,8 @@ theme:
   features:
     - content.code.copy
     - content.code.annotate
+    - navigation.footer
+  custom_dir: overrides
 
 plugins:
   - search
@@ -30,3 +32,12 @@ extra:
   annotate:
     json: [.s2]
     yaml: [".no"]
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/connor-stewarty
+    - icon: fontawesome/brands/gitlab
+      link: https://gitlab.com/connorstewarty
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/connorstewarty
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/connorstewarty/
