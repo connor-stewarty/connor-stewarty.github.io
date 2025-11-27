@@ -178,10 +178,12 @@ The diagram labels should now be populated with data from Prometheus and show `:
 ![Create Dashboard View](./2025-11-23-live-server-rack-diagrams/create-dashboard-view.png)
 
 ### GitOps
+* TODO
 * Example repo
 * Point to it w/Argo?
 
 ## Troubleshooting
+* TODO
 
 ## Sources
 * [https://www.reddit.com/r/sysadmin/comments/13ox4rr/what_do_you_use_for_live_rack_diagrams/](https://www.reddit.com/r/sysadmin/comments/13ox4rr/what_do_you_use_for_live_rack_diagrams/)
